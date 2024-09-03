@@ -1,11 +1,71 @@
-## My Project
+# GenAI System Evaluation
 
-TODO: Fill this README out!
+This repository contains sample notebooks to demonstrate how to evaluate an LLM-augmented system. It provides tools and methods for local evaluation.
 
-Be sure to:
+## Table of Contents
 
-* Change the title in this README
-* Edit your repository description on GitHub
+- [Folder Structure](#folder-structure)
+- [Getting Started](#getting-started)
+- [Usage](#usage)
+- [CI/CD Integration](#cicd-integration)
+- [Authors](#authors)
+- [Acknowledgements](#acknowledgements)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Folder Structure
+
+```
+LLM-System-Validation/
+├── data/                  # RAG context and validation datasets
+├── example-notebooks/     # Notebooks for evaluating various components
+|__ script/                # Various scripts for setting up environment.
+|__ .github/               # Example github actions
+```
+
+### Details
+
+- `data/`: Contains the datasets used for Retrieval-Augmented Generation (RAG) context and validation.
+- `example-notebooks/`: Jupyter notebooks demonstrating the evaluation of:
+  - Embeddings
+  - Chunking strategies
+  - Reranking methods
+  - Prompt engineering
+  - LLM-as-Judge evaluation recipes
+
+## Getting Started
+
+1. Clone the repository:
+   ```
+   git clone git@github.com:aws-samples/genai-system-evaluation.git
+   cd genai-system-evaluation
+   ```
+
+2. Set up a virtual environment:
+   ```
+   python -m venv venv
+   source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+   ```
+
+3. Install the required dependencies:
+   ```
+   pip install -r requirements.txt
+   ```
+
+4. Download opensearch docs for RAG context.
+   ```
+   cd scripts
+   python pull_opensearch_docs.py
+   ```
+
+## Usage
+
+1. Explore the example notebooks in the `example-notebooks/` directory to understand different evaluation techniques.
+
+## Authors
+
+- Tanner McRae - *Initial work* - [Your GitHub Profile](https://github.com/tannermcrae)
+- Felix Huthmacher  - *Initial work* - [Your GitHub Profile](https://github.com/fhuthmacher)
 
 ## Security
 
