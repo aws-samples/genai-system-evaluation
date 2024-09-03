@@ -1,0 +1,122 @@
+
+      <html>
+      <head>
+        <meta charset="UTF-8" />
+        <script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
+        <script src="https://assets.crowd.aws/gen-ai-components.js"></script>
+        <script>
+          document.getElementById('submitButton').onclick = function() {
+              document.querySelector('crowd-form').submit();
+          };
+        </script>
+        <style>
+          body {
+            padding-left: 20px;
+            margin-bottom: 20px;
+          }
+          .highlight {
+            background-color: yellow;
+          }
+          .container {
+            margin-bottom: 20px;
+          }
+          .outer-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1400px;
+          }
+          .left-container, .right-container {
+            padding: 20px;
+            min-width: 75%;
+          }
+          .right-container {
+            border-left: 2px solid #d5dbdb;
+          }
+        </style>
+      </head>
+    <body>
+    <crowd-form>
+      <!-- Prevent crowd-form from creating its own button -->
+      <crowd-button form-action="submit" style="display: none;"></crowd-button> 
+      <div class="container">
+        <h1>Instructions</h1>
+        For the LLM-as-a-Judge result, please complete the tasks on the right panel using your best judgment. 
+      </div>
+      <br>
+      <div class="outer-container">
+        <div class="left-container">
+          <h2>Original Prompt</h2>
+          <div>{{ task.input.source }}</div>
+          <br>
+          <h2>RAG System Response</h2>
+          <div>{{ task.input.response }}</div>
+          <br>
+          <h2>Evaluation Criteria</h2>
+          <div>{{ task.input.eval_criteria }}</div>
+          <br>
+          <h2>LLM-as-a-Judge Score</h2>
+          <div>{{ task.input.score }}</div>
+          <br>
+          <h2>LLM-as-a-Judge Reasoning</h2>
+          <div>{{ task.input.reasoning }}</div>
+          <br> 
+          <h2>RAG Context</h2>
+          <div>{{ task.input.retrieved_chunks }}</div>
+                
+        </div>
+        <div class="right-container">
+          <h2>Evaluation</h2>
+          <div>
+            <label for="context">Context:</label>
+            <div>
+              <input type="radio" id="context1" name="context" value="1" required>
+              <label for="context1">1 Point</label><br>
+              <input type="radio" id="context2" name="context" value="0">
+              <label for="context2">0 Point</label><br>
+            </div>
+          </div>
+          <br>
+          <div>
+            <label for="completeness">Completeness:</label>
+            <div>
+              <input type="radio" id="completeness1" name="completeness" value="1" required>
+              <label for="completeness1">1 Point</label><br>
+              <input type="radio" id="completeness2" name="completeness" value="0">
+              <label for="completeness2">0 Point</label><br>
+            </div>
+          </div>
+          <br>
+          <div>
+            <label for="conciseness">Conciseness:</label>
+            <div>
+              <input type="radio" id="conciseness1" name="conciseness" value="1" required>
+              <label for="conciseness1">1 Point</label><br>
+              <input type="radio" id="conciseness2" name="conciseness" value="0">
+              <label for="conciseness2">0 Point</label><br>
+            </div>
+          </div>
+          <br>
+          <div>
+            <label for="issues">Select any issues observed:</label>
+            <div>
+              <input type="checkbox" id="grammar" name="issues" value="grammar">
+              <label for="grammar">Grammar issues</label><br>
+              <input type="checkbox" id="factual" name="issues" value="factual">
+              <label for="factual">Factual inaccuracies</label><br>
+              <input type="checkbox" id="missing" name="issues" value="missing">
+              <label for="missing">Missing information</label><br>
+              <input type="checkbox" id="other" name="issues" value="other">
+              <label for="other">Other</label>
+            </div>
+          </div>
+          <br>
+          <div>
+           <crowd-button id="submitButton">Submit</crowd-button>
+          </div
+        </div>
+      </div>
+    </crowd-form>
+    </body>
+    </html>
+    
