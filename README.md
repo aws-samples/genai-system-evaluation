@@ -64,8 +64,8 @@ LLM-System-Validation/
 
 ## Authors
 
-- Tanner McRae - *Initial work* - [Your GitHub Profile](https://github.com/tannermcrae)
-- Felix Huthmacher  - *Initial work* - [Your GitHub Profile](https://github.com/fhuthmacher)
+- Tanner McRae - *Initial work* - [github](https://github.com/tannermcrae)
+- Felix Huthmacher  - *Initial work* - [github](https://github.com/fhuthmacher)
 
 ## Security
 
