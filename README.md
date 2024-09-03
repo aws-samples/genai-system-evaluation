@@ -53,9 +53,9 @@ LLM-System-Validation/
    ```
 
 4. Download opensearch docs for RAG context.
-   ```
-   cd scripts
-   python pull_opensearch_docs.py
+   ``` bash
+   $ cd data && mkdir opensearch-docs
+   $ git clone https://github.com/opensearch-project/documentation-website.git
    ```
 
 ## Usage
