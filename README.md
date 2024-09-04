@@ -2,6 +2,9 @@
 
 This repository contains sample notebooks to demonstrate how to evaluate an LLM-augmented system. It provides tools and methods for local evaluation.
 
+## PreRequisites
+These notebooks were tested with Python 3.12. If you're running locally, ensure you're using 3.12 (preferably using pyenv). Also ensure that you have the AWS CLI setup with the credentials you want set to the default profile
+
 ## Table of Contents
 
 - [Folder Structure](#folder-structure)
@@ -35,6 +38,8 @@ LLM-System-Validation/
 
 ## Getting Started
 
+This notebook was tested with Python 3.12
+
 1. Clone the repository:
    ```
    git clone git@github.com:aws-samples/genai-system-evaluation.git
@@ -54,9 +59,17 @@ LLM-System-Validation/
 
 4. Download opensearch docs for RAG context.
    ``` bash
-   $ cd data && mkdir opensearch-docs
+   $ cd data && mkdir opensearch-docs && cd  opensearch-docs
    $ git clone https://github.com/opensearch-project/documentation-website.git
    ```
+
+4. Go to notebook examples & start jupyter notebooks!
+   ``` bash
+   $ cd ../../example-notebooks
+   $ jupyter notebook
+   ```
+
+5. Start at notebook 1 and work your way through them!
 
 ## Usage
 

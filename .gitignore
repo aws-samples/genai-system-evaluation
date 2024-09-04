@@ -1,3 +1,13 @@
+# Our RAG context
+data/opensearch-docs/*
+
+# Venv file
+venv
+
+# Chroma DB file
+data/chroma/*
+data/chroma.zip
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
