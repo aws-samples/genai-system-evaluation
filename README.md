@@ -2,8 +2,12 @@
 
 This repository contains sample notebooks to demonstrate how to evaluate an LLM-augmented system. It provides tools and methods for local evaluation.
 
-## PreRequisites
-These notebooks were tested with Python 3.12. If you're running locally, ensure you're using 3.12 (preferably using pyenv). Also ensure that you have the AWS CLI setup with the credentials you want set to the default profile
+## Environment
+1. Ensure you've enabled Claude Sonnet and Claude Haiku in the Bedrock Console
+1. Ensure you have adequate permissions to call Bedrock from the Python SDK (Boto3)
+
+### Local
+These notebooks were tested with Python 3.12. If you're running locally, ensure you're using 3.12. Also ensure that you have the AWS CLI setup with the credentials you want set to the default profile. These credentials need access to Amazon Bedrock Models
 
 ## Table of Contents
 
@@ -30,15 +34,13 @@ LLM-System-Validation/
 
 - `data/`: Contains the datasets used for Retrieval-Augmented Generation (RAG) context and validation.
 - `example-notebooks/`: Jupyter notebooks demonstrating the evaluation of:
-  - Embeddings
-  - Chunking strategies
-  - Reranking methods
-  - Prompt engineering
-  - LLM-as-Judge evaluation recipes
+  - Embeddings and Chunking Strategy
+  - Reranking with large chunk sizes
+  - LLM-As-A-Judge Prompt Engineering
+  - RAG Prompt Engineering
+  - E2E RAG Testing
 
 ## Getting Started
-
-This notebook was tested with Python 3.12
 
 1. Clone the repository:
    ```
