@@ -14,7 +14,6 @@ These notebooks were tested with Python 3.12. If you're running locally, ensure 
 - [Folder Structure](#folder-structure)
 - [Getting Started](#getting-started)
 - [Usage](#usage)
-- [CI/CD Integration](#cicd-integration)
 - [Authors](#authors)
 - [Acknowledgements](#acknowledgements)
 - [Contributing](#contributing)
