@@ -1,5 +1,6 @@
 # Our RAG context
 data/opensearch-docs/*
+data/sample-data/*
 
 # Venv file
 venv

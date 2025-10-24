@@ -2,9 +2,15 @@
 
 import os
 import boto3
-import base64
+import re
 from pathlib import Path
 from PyPDF2 import PdfReader, PdfWriter
+from concurrent.futures import ProcessPoolExecutor
+from functools import partial
+
+def normalize_filename(filename):
+    """Normalize filename: lowercase, remove spaces/dashes/underscores"""
+    return re.sub(r'[-_\s]+', '', filename.lower())
 
 def split_pdf(pdf_path, output_dir):
     """Split PDF into individual pages"""
@@ -12,9 +18,9 @@ def split_pdf(pdf_path, output_dir):
     
     # Handle encrypted PDFs
     if reader.is_encrypted:
-        reader.decrypt("")  # Try empty password first
+        reader.decrypt("")
     
-    pdf_name = Path(pdf_path).stem
+    pdf_name = normalize_filename(Path(pdf_path).stem)
     
     page_files = []
     for page_num, page in enumerate(reader.pages, 1):
@@ -53,6 +59,23 @@ def pdf_to_markdown(pdf_path):
     
     return response['output']['message']['content'][0]['text']
 
+def process_page(page_file, markdown_dir):
+    """Process a single page - for parallel execution"""
+    try:
+        print(f"Converting {page_file.name} to markdown...")
+        markdown_content = pdf_to_markdown(page_file)
+        
+        # Save markdown file
+        markdown_file = markdown_dir / f"{page_file.stem}.md"
+        with open(markdown_file, 'w', encoding='utf-8') as f:
+            f.write(markdown_content)
+        
+        print(f"Created {markdown_file}")
+        return str(markdown_file)
+    except Exception as e:
+        print(f"Error processing {page_file}: {e}")
+        return None
+
 def main():
     doc_dir = Path('doc')
     stage_dir = Path('stage')
@@ -63,23 +86,21 @@ def main():
     markdown_dir.mkdir(exist_ok=True)
     
     # Process all PDFs in doc/
+    all_page_files = []
     for pdf_file in doc_dir.glob('*.pdf'):
         print(f"Processing {pdf_file.name}...")
-        
-        # Split PDF into pages
         page_files = split_pdf(pdf_file, stage_dir)
-        
-        # Convert each page to markdown
-        for page_file in page_files:
-            print(f"Converting {page_file.name} to markdown...")
-            markdown_content = pdf_to_markdown(page_file)
-            
-            # Save markdown file
-            markdown_file = markdown_dir / f"{page_file.stem}.md"
-            with open(markdown_file, 'w', encoding='utf-8') as f:
-                f.write(markdown_content)
-            
-            print(f"Created {markdown_file}")
+        all_page_files.extend(page_files)
+    
+    print(f"Converting {len(all_page_files)} pages to markdown using 3 parallel processes...")
+    
+    # Process pages in parallel
+    process_func = partial(process_page, markdown_dir=markdown_dir)
+    with ProcessPoolExecutor(max_workers=3) as executor:
+        results = list(executor.map(process_func, all_page_files))
+    
+    successful = [r for r in results if r is not None]
+    print(f"Successfully converted {len(successful)} pages to markdown")
 
 if __name__ == "__main__":
     main()
